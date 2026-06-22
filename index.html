@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SIX COLLECTIVE STUDIO — Where Brands Take Shape</title>
+  <meta name="description" content="브랜드를 자산으로 만드는 전략적 크리에이티브 스튜디오. Strategic creative studio that structures brand value across six core domains." />
+  <meta property="og:title" content="SIX COLLECTIVE STUDIO" />
+  <meta property="og:description" content="Where Brands Take Shape" />
+  <meta property="og:type" content="website" />
+
+  <!-- Pretendard (Korean + Latin) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css" />
+
+  <!-- Libre Baskerville: Romie 미보유 시 대체 서체 -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
+
+  <style>
+    /*
+      FONT SETUP
+      ─────────────────────────────────────────────────────
+      Romie 웹폰트 파일(romie-regular.woff2, romie-italic.woff2 등)을
+      index.html 과 같은 폴더의 /fonts/ 디렉토리에 넣으면
+      아래 @font-face 주석을 해제하여 바로 사용 가능합니다.
+
+      @font-face {
+        font-family: 'Romie';
+        src: url('fonts/romie-regular.woff2') format('woff2');
+        font-weight: 400;
+        font-style: normal;
+        font-display: swap;
+      }
+      @font-face {
+        font-family: 'Romie';
+        src: url('fonts/romie-italic.woff2') format('woff2');
+        font-weight: 400;
+        font-style: italic;
+        font-display: swap;
+      }
+      ─────────────────────────────────────────────────────
+    */
+
+    :root {
+      /* Helvetica Neue: display/heading (영문 산세리프) */
+      --font-display: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      /* Romie: 세리프 이탤릭 악센트. 파일 없으면 Libre Baskerville 대체 */
+      --font-serif:   'Romie', 'Libre Baskerville', Georgia, serif;
+      /* Pretendard: 한글 + 본문 */
+      --font-body:    'Pretendard Variable', Pretendard, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+
+      --navy:   #0A0D2E;
+      --yellow: #F5E500;
+      --white:  #ffffff;
+      --gray:   #8888a8;
+      --border: rgba(245,229,0,0.15);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--navy);
+      color: var(--white);
+      font-family: var(--font-body);
+      font-weight: 400;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 20px 48px;
+      background: rgba(10,13,46,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      transition: padding 0.3s;
+    }
+    nav.scrolled { padding: 14px 48px; }
+    .nav-logo-img {
+      height: 48px;
+      width: auto;
+      display: block;
+    }
+    .nav-links { display: flex; gap: 36px; }
+    .nav-links a {
+      font-family: var(--font-display);
+      font-size: 0.78rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--gray);
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--yellow); }
+    .nav-cta {
+      font-family: var(--font-display);
+      font-size: 0.78rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      border: 1px solid var(--yellow);
+      padding: 9px 22px;
+      color: var(--yellow);
+      transition: background 0.2s, color 0.2s;
+    }
+    .nav-cta:hover { background: var(--yellow); color: var(--navy); }
+    .nav-hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+    .nav-hamburger span { display: block; width: 24px; height: 2px; background: var(--yellow); }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      display: flex; flex-direction: column; justify-content: center;
+      padding: 120px 48px 80px;
+      position: relative; overflow: hidden;
+    }
+    .hero-eyebrow {
+      font-family: var(--font-display);
+      font-size: 0.75rem;
+      font-weight: 400;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--yellow);
+      margin-bottom: 28px;
+      opacity: 0.75;
+    }
+    .hero-title {
+      font-family: var(--font-display);
+      font-weight: 900;
+      font-size: clamp(6rem, 18vw, 18rem);
+      line-height: 0.88;
+      color: var(--yellow);
+      letter-spacing: -0.02em;
+      text-transform: uppercase;
+    }
+    .hero-sub {
+      /* Romie 이탤릭 사용 구간 */
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-weight: 400;
+      font-size: clamp(1.4rem, 3vw, 2.8rem);
+      color: var(--white);
+      margin-top: 20px;
+      letter-spacing: 0.01em;
+    }
+    .hero-desc {
+      max-width: 520px;
+      font-family: var(--font-body);
+      font-size: 1rem;
+      font-weight: 300;
+      color: rgba(255,255,255,0.6);
+      margin-top: 28px;
+      line-height: 1.75;
+    }
+    .hero-actions { display: flex; gap: 16px; margin-top: 44px; flex-wrap: wrap; }
+    .btn-primary {
+      display: inline-block;
+      background: var(--yellow);
+      color: var(--navy);
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 0.85rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      padding: 16px 40px;
+      transition: opacity 0.2s, transform 0.2s;
+    }
+    .btn-primary:hover { opacity: 0.88; transform: translateY(-2px); }
+    .btn-ghost {
+      display: inline-block;
+      border: 1px solid rgba(255,255,255,0.3);
+      color: var(--white);
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-size: 0.85rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      padding: 16px 40px;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .btn-ghost:hover { border-color: var(--yellow); color: var(--yellow); }
+    .hero-bg-text {
+      position: absolute; right: -2vw; bottom: -4vh;
+      font-family: var(--font-display);
+      font-weight: 900;
+      font-size: clamp(10rem, 28vw, 36rem);
+      color: rgba(245,229,0,0.04);
+      line-height: 1;
+      pointer-events: none; user-select: none;
+      letter-spacing: -0.02em;
+      text-transform: uppercase;
+    }
+
+    /* ── SECTION BASE ── */
+    section { padding: 100px 48px; }
+    .section-label {
+      font-family: var(--font-display);
+      font-size: 0.7rem;
+      font-weight: 400;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--yellow);
+      margin-bottom: 20px;
+      opacity: 0.7;
+    }
+    .section-title {
+      font-family: var(--font-display);
+      font-weight: 900;
+      font-size: clamp(2.8rem, 6vw, 5.5rem);
+      line-height: 0.95;
+      letter-spacing: -0.02em;
+      text-transform: uppercase;
+    }
+    /* Romie 이탤릭 악센트 클래스 */
+    .serif-accent {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-weight: 400;
+      font-size: 1.05em;
+      letter-spacing: 0;
+      text-transform: none;
+    }
+    .divider { width: 48px; height: 2px; background: var(--yellow); margin: 32px 0; }
+
+    /* ── ABOUT ── */
+    #about { border-top: 1px solid var(--border); }
+    .about-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 80px; margin-top: 60px; align-items: start;
+    }
+    .about-left .big-quote {
+      font-family: var(--font-body);
+      font-style: normal;
+      font-weight: 700;
+      font-size: clamp(1.5rem, 2.8vw, 2.2rem);
+      line-height: 1.35;
+      color: var(--yellow);
+      margin-bottom: 28px;
+      letter-spacing: -0.01em;
+    }
+    .about-left p {
+      font-family: var(--font-body);
+      font-weight: 300;
+      color: rgba(255,255,255,0.7);
+      font-size: 1rem;
+      line-height: 1.8;
+      margin-bottom: 18px;
+    }
+    .about-right { display: flex; flex-direction: column; gap: 32px; }
+    .credential-item { border-left: 2px solid var(--border); padding-left: 20px; }
+    .credential-item .ci-label {
+      font-family: var(--font-display);
+      font-size: 0.68rem;
+      font-weight: 400;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--yellow);
+      margin-bottom: 8px;
+      opacity: 0.7;
+    }
+    .credential-item p {
+      font-family: var(--font-body);
+      font-weight: 300;
+      color: rgba(255,255,255,0.75);
+      font-size: 0.95rem;
+      line-height: 1.65;
+    }
+    .not-us { margin-top: 48px; padding: 28px 32px; border: 1px solid var(--border); }
+    .not-us .nu-title {
+      font-family: var(--font-display);
+      font-size: 0.68rem;
+      font-weight: 400;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gray);
+      margin-bottom: 16px;
+    }
+    .not-us ul { list-style: none; }
+    .not-us ul li {
+      font-family: var(--font-body);
+      font-weight: 300;
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.45);
+      padding: 7px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      display: flex; align-items: center; gap: 10px;
+    }
+    .not-us ul li::before { content: 'x'; color: var(--yellow); opacity: 0.5; font-size: 0.72rem; }
+
+    /* ── SERVICES ── */
+    #services { border-top: 1px solid var(--border); }
+    .services-intro {
+      display: flex; justify-content: space-between; align-items: flex-end;
+      gap: 40px; flex-wrap: wrap; margin-bottom: 60px;
+    }
+    .services-intro p {
+      max-width: 440px;
+      font-family: var(--font-body);
+      font-weight: 300;
+      color: rgba(255,255,255,0.6);
+      font-size: 1rem;
+      line-height: 1.75;
+    }
+    .service-cards { display: flex; flex-direction: column; gap: 2px; }
+    .service-card {
+      display: grid; grid-template-columns: 80px 1fr auto;
+      align-items: center; gap: 40px; padding: 36px 40px;
+      border: 1px solid var(--border); cursor: default;
+      transition: background 0.25s, border-color 0.25s;
+    }
+    .service-card:hover { background: rgba(245,229,0,0.04); border-color: rgba(245,229,0,0.35); }
+    .service-card .sc-num {
+      font-family: var(--font-display);
+      font-weight: 900;
+      font-size: 3.5rem;
+      color: rgba(245,229,0,0.18);
+      line-height: 1;
+    }
+    .service-card .sc-level {
+      font-family: var(--font-display);
+      font-size: 0.65rem;
+      font-weight: 400;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--yellow);
+      margin-bottom: 6px;
+      opacity: 0.7;
+    }
+    .service-card .sc-name {
+      font-family: var(--font-display);
+      font-weight: 900;
+      font-size: clamp(1.4rem, 2.2vw, 1.9rem);
+      letter-spacing: -0.01em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+    .service-card .sc-desc {
+      font-family: var(--font-body);
+      font-weight: 300;
+      color: rgba(255,255,255,0.6);
+      font-size: 0.9rem;
+      line-height: 1.7;
+    }
+    .service-card .sc-tag {
+      font-family: var(--font-display);
+      font-size: 0.72rem;
+      font-weight: 400;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      border: 1px solid var(--border);
+      padding: 6px 14px;
+      color: var(--yellow);
+      white-space: nowrap;
+      opacity: 0.7;
+    }
+
+    /* ── WORK ── */
+    #work { border-top: 1px solid var(--border); }
+    .work-coming {
+      margin-top: 60px; text-align: center;
+      padding: 80px 40px; border: 1px solid var(--border);
+    }
+    .work-coming .wc-big {
+      font-family: var(--font-display);
+      font-weight: 900;
+      font-size: clamp(3rem, 8vw, 7rem);
+      color: rgba(245,229,0,0.12);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+    .work-coming p {
+      font-family: var(--font-body);
+      font-weight: 300;
+      color: rgba(255,255,255,0.45);
+      font-size: 0.95rem;
+      max-width: 360px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+
+    /* ── CONTACT ── */
+    #contact { border-top: 1px solid var(--border); }
+    .contact-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 80px; margin-top: 60px; align-items: start;
+    }
+    .contact-left .cl-headline {
+      font-family: var(--font-body);
+      font-style: normal;
+      font-weight: 700;
+      font-size: clamp(1.6rem, 3vw, 2.6rem);
+      line-height: 1.25;
+      margin-bottom: 24px;
+      letter-spacing: -0.01em;
+    }
+    .contact-left p {
+      font-family: var(--font-body);
+      font-weight: 300;
+      color: rgba(255,255,255,0.6);
+      font-size: 0.98rem;
+      line-height: 1.8;
+      margin-bottom: 36px;
+    }
+    .contact-note {
+      padding: 24px;
+      border: 1px solid var(--border);
+    }
+    .contact-note .cn-label {
+      font-family: var(--font-display);
+      font-size: 0.65rem;
+      font-weight: 400;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--yellow);
+      margin-bottom: 10px;
+      opacity: 0.7;
+    }
+    .contact-note p {
+      font-family: var(--font-body);
+      font-weight: 300;
+      color: rgba(255,255,255,0.6);
+      font-size: 0.9rem;
+      line-height: 1.7;
+      margin-bottom: 0;
+    }
+    .contact-form { display: flex; flex-direction: column; gap: 16px; }
+    .form-group { display: flex; flex-direction: column; gap: 8px; }
+    .form-group label {
+      font-family: var(--font-display);
+      font-size: 0.68rem;
+      font-weight: 400;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gray);
+    }
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border);
+      color: var(--white);
+      padding: 14px 16px;
+      font-family: var(--font-body);
+      font-weight: 300;
+      font-size: 0.95rem;
+      outline: none;
+      transition: border-color 0.2s;
+      width: 100%;
+    }
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus { border-color: rgba(245,229,0,0.5); }
+    .form-group select option { background: var(--navy); }
+    .form-group textarea { resize: vertical; min-height: 120px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .form-submit {
+      width: 100%;
+      background: var(--yellow);
+      color: var(--navy);
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 0.88rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      padding: 18px;
+      border: none;
+      cursor: pointer;
+      transition: opacity 0.2s, transform 0.15s;
+    }
+    .form-submit:hover { opacity: 0.88; transform: translateY(-1px); }
+    .form-note {
+      font-family: var(--font-body);
+      font-weight: 300;
+      font-size: 0.78rem;
+      color: var(--gray);
+      margin-top: 4px;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 40px 48px;
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 20px;
+    }
+    .footer-logo {
+      font-family: var(--font-display);
+      font-weight: 900;
+      font-size: 1rem;
+      color: var(--yellow);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+    .footer-copy {
+      font-family: var(--font-body);
+      font-weight: 300;
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.3);
+      letter-spacing: 0.06em;
+    }
+
+    /* ── MOBILE ── */
+    @media (max-width: 900px) {
+      nav { padding: 18px 24px; }
+      nav.scrolled { padding: 12px 24px; }
+      .nav-links {
+        display: none; flex-direction: column;
+        position: absolute; top: 100%; left: 0; right: 0;
+        background: var(--navy); padding: 20px 24px;
+        border-bottom: 1px solid var(--border); gap: 18px;
+      }
+      .nav-links.open { display: flex; }
+      .nav-cta { display: none; }
+      .nav-hamburger { display: flex; }
+      #hero { padding: 100px 24px 60px; }
+      .hero-bg-text { display: none; }
+      section { padding: 72px 24px; }
+      .about-grid { grid-template-columns: 1fr; gap: 48px; }
+      .contact-grid { grid-template-columns: 1fr; gap: 48px; }
+      .service-card { grid-template-columns: 52px 1fr; }
+      .service-card .sc-tag { display: none; }
+      .form-row { grid-template-columns: 1fr; }
+      footer { padding: 32px 24px; flex-direction: column; align-items: flex-start; gap: 10px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="#hero"><img src="logo_nav.png" alt="SIX COLLECTIVE STUDIO" class="nav-logo-img" /></a>
+  <div class="nav-links" id="navLinks">
+    <a href="#about">About</a>
+    <a href="#services">Services</a>
+    <a href="#work">Work</a>
+    <a href="#contact">Contact</a>
+  </div>
+  <a href="#contact" class="nav-cta">문의하기</a>
+  <div class="nav-hamburger" id="hamburger" onclick="toggleNav()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <p class="hero-eyebrow">Strategic Creative Studio · Seoul</p>
+  <h1 class="hero-title">SIX</h1>
+  <p class="hero-sub">Where Brands Take Shape</p>
+  <p class="hero-desc">브랜드를 자산으로 만드는 전략적 크리에이티브 스튜디오.<br />
+  감각이 아닌 구조로, 캠페인이 아닌 자산으로 브랜드를 설계합니다.</p>
+  <div class="hero-actions">
+    <a href="#contact" class="btn-primary">프로젝트 문의</a>
+    <a href="#services" class="btn-ghost">서비스 보기</a>
+  </div>
+  <div class="hero-bg-text" aria-hidden="true">SIX</div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <p class="section-label">About</p>
+  <h2 class="section-title">브랜드는<br />자산이어야 한다</h2>
+  <div class="divider"></div>
+  <div class="about-grid">
+    <div class="about-left">
+      <p class="big-quote">"디자인 스튜디오가 아닙니다.<br />전략적 크리에이티브 스튜디오입니다."</p>
+      <p>SIX COLLECTIVE는 브랜드 전략과 크리에이티브 실행을 하나의 구조 안에서 다룹니다. 로고를 만드는 것이 아니라 브랜드의 자산 가치를 설계합니다.</p>
+      <p>6개의 핵심 도메인 — 전략, 아이덴티티, 언어, 경험, 운영, 성장 — 을 통해 브랜드를 단기 프로젝트가 아닌 장기 자산으로 구축합니다.</p>
+      <p>대표 Kelly Kwon은 국내 주요 대기업 브랜드 프로젝트를 직접 총괄한 크리에이티브 디렉터입니다.</p>
+      <div class="not-us">
+        <p class="nu-title">우리가 하지 않는 일</p>
+        <ul>
+          <li>단순 로고 제작</li>
+          <li>저가 디자인 외주</li>
+          <li>단발성 디자인 작업</li>
+          <li>공모전형 디자인</li>
+        </ul>
+      </div>
+    </div>
+    <div class="about-right">
+      <div class="credential-item">
+        <p class="ci-label">Positioning</p>
+        <p>브랜드를 자산으로 만드는 전략적 크리에이티브 스튜디오 — 감각만 있는 디자인 스튜디오도, 캠페인 중심의 광고대행사도 아닙니다.</p>
+      </div>
+      <div class="credential-item">
+        <p class="ci-label">Primary Target</p>
+        <p>성장 정체를 경험하고 있는 중소·중견 기업. 브랜드가 문제인지 인식하고 있지만 어디서부터 시작해야 할지 모르는 경영진.</p>
+      </div>
+      <div class="credential-item">
+        <p class="ci-label">Brand Diagnosis System</p>
+        <p>50문항 · 11개 카테고리 · 가중치 기반 진단 시스템. 고객이 자신의 브랜드 문제를 수치로 확인하고 솔루션으로 자연스럽게 연결됩니다.</p>
+      </div>
+      <div class="credential-item">
+        <p class="ci-label">Founded</p>
+        <p>2026 · Seoul, Korea<br />Creative Director : Kelly Kwon</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="services-intro">
+    <div>
+      <p class="section-label">Services</p>
+      <h2 class="section-title">3-Level<br />Service Structure</h2>
+    </div>
+    <p>가격은 협상 대상이 아닌 기준점입니다. 시간당 노동이 아닌 가치 기반 패키지로, 브랜드 전략의 깊이에 따라 세 단계로 구성됩니다.</p>
+  </div>
+  <div class="service-cards">
+    <div class="service-card">
+      <div class="sc-num">01</div>
+      <div class="sc-body">
+        <p class="sc-level">Level 1</p>
+        <p class="sc-name">Brand Foundation</p>
+        <p class="sc-desc">브랜드 전략 + BI 시스템 전체를 설계하는 핵심 서비스. 포지셔닝, 브랜드 아키텍처, 아이덴티티 시스템을 패키지형 고정가로 제공합니다. 납기: Essential 4주 / Standard 6~8주 / Premium 10~14주.</p>
+      </div>
+      <div class="sc-tag">핵심 서비스</div>
+    </div>
+    <div class="service-card">
+      <div class="sc-num">02</div>
+      <div class="sc-body">
+        <p class="sc-level">Level 2</p>
+        <p class="sc-name">Brand Experience</p>
+        <p class="sc-desc">Foundation 이후 또는 독립 프로젝트로 수주. 브랜드 경험 설계 — 공간, 디지털, 콘텐츠, 커뮤니케이션. 범위 기반 견적, 모듈형 구조로 필요한 부분만 선택 가능합니다.</p>
+      </div>
+      <div class="sc-tag">모듈형</div>
+    </div>
+    <div class="service-card">
+      <div class="sc-num">03</div>
+      <div class="sc-body">
+        <p class="sc-level">Level 3</p>
+        <p class="sc-name">Brand Growth Advisory</p>
+        <p class="sc-desc">리테이너 기반 브랜드 자문. Foundation 완료 고객에게 제안하는 장기 파트너십. 브랜드가 실제로 적용되고 성장하는 과정을 함께 관리합니다.</p>
+      </div>
+      <div class="sc-tag">리테이너</div>
+    </div>
+  </div>
+</section>
+
+<!-- WORK -->
+<section id="work">
+  <p class="section-label">Work</p>
+  <h2 class="section-title">Selected<br />Projects</h2>
+  <div class="divider"></div>
+  <div class="work-coming">
+    <div class="wc-big">Coming Soon</div>
+    <p>포트폴리오는 현재 준비 중입니다.<br />프로젝트 문의는 아래 Contact 섹션을 이용해 주세요.</p>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <p class="section-label">Contact</p>
+  <h2 class="section-title">브랜드 문제를<br />함께 진단해봅시다</h2>
+  <div class="divider"></div>
+  <div class="contact-grid">
+    <div class="contact-left">
+      <p class="cl-headline">첫 미팅의 목적은<br />판매가 아닙니다.</p>
+      <p>고객의 브랜드 문제를 고객보다 더 정확하게 정의하는 것이 우리의 영업입니다. 아래 양식을 작성해 주시면 영업일 기준 1~2일 내 연락 드립니다.</p>
+      <div class="contact-note">
+        <p class="cn-label">Discovery Call</p>
+        <p>30분 디스커버리 콜을 통해 브랜드 현황을 무료로 진단해 드립니다. 부담 없이 문의해 주세요.</p>
+      </div>
+    </div>
+    <div>
+      <!--
+        Formspree 연동:
+        1. https://formspree.io 계정 생성
+        2. 새 폼 만들고 form ID 복사
+        3. 아래 YOUR_FORM_ID 를 실제 ID로 교체
+      -->
+      <form class="contact-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="name">이름 / Name</label>
+            <input type="text" id="name" name="name" placeholder="홍길동" required />
+          </div>
+          <div class="form-group">
+            <label for="company">회사명 / Company</label>
+            <input type="text" id="company" name="company" placeholder="(주)회사명" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="email">이메일 / Email</label>
+          <input type="email" id="email" name="email" placeholder="your@email.com" required />
+        </div>
+        <div class="form-group">
+          <label for="service">관심 서비스</label>
+          <select id="service" name="service">
+            <option value="">선택해 주세요</option>
+            <option>Level 1 — Brand Foundation</option>
+            <option>Level 2 — Brand Experience</option>
+            <option>Level 3 — Brand Growth Advisory</option>
+            <option>미정 / 상담 후 결정</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="message">문의 내용</label>
+          <textarea id="message" name="message" placeholder="브랜드 현황이나 고민을 간략히 공유해 주세요." required></textarea>
+        </div>
+        <button type="submit" class="form-submit">문의 보내기 →</button>
+        <p class="form-note">* 영업일 기준 1~2일 내 답변 드립니다.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">SIX COLLECTIVE STUDIO</div>
+  <p class="footer-copy">© 2026 Six Collective Studio · Where Brands Take Shape</p>
+</footer>
+
+<script>
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 60);
+  });
+  function toggleNav() {
+    document.getElementById('navLinks').classList.toggle('open');
+  }
+  document.querySelectorAll('.nav-links a').forEach(link => {
+    link.addEventListener('click', () => {
+      document.getElementById('navLinks').classList.remove('open');
+    });
+  });
+</script>
+</body>
+</html>
